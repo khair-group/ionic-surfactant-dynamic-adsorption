@@ -152,38 +152,3 @@ def load(filename):
         obj = pickle.load(f)
 
     return obj
-
-
-
-def get_summary_file():
-    linesinfile = []
-    breakerstring = '-----------------------------------------'
-    directory = './'
-    for file in os.listdir(directory):
-        if file.endswith('.nso'):
-            try: 
-                obj = load(file)
-            except:
-                linesinfile.append('\n')
-                linesinfile.append('file errored:')
-                linesinfile.append(file)
-                linesinfile.append('\n')
-                linesinfile.append(breakerstring)
-                linesinfile.append('\n')
-                continue
-            Da = obj.params['Da']
-            eps = obj.params['eps']
-            linesinfile.append('\n')
-            linesinfile.append(file)
-            linesinfile.append('\n')
-            linesinfile.append(f'eps = {eps}')
-            linesinfile.append('\n')
-            linesinfile.append(f'Da = {Da}')
-            linesinfile.append('\n')
-            linesinfile.append(breakerstring)
-            linesinfile.append('\n')
-
-        with open('results_of_search.txt', 'xt') as f:
-            f.writelines(linesinfile)
-    
-    return None
